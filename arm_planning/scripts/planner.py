@@ -82,7 +82,7 @@ rospy.loginfo(actual_pose)"""
 
 #Pose-driven (=joint-driven)
 if len(sys.argv) != 2:
-    rospy.loginfo("No pose specified")
+    rospy.loginfo("No posessssssssssss specified")
     group.set_named_target("Middle_center")
 else:
     try:
