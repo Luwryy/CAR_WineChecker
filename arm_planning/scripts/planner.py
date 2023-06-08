@@ -48,6 +48,8 @@ display_trajectory_publisher = rospy.Publisher('/move_group/display_planned_path
 
 pose_target = geometry_msgs.msg.Pose()
 
+#Position-driven
+"""
 if len(sys.argv) >= 4:
     pose_target.position.x = float(sys.argv[1])
     pose_target.position.y = float(sys.argv[2])
@@ -76,14 +78,29 @@ rospy.loginfo(pose_target)
 
 actual_pose = group.get_current_pose()
 rospy.loginfo("Current position:")
-rospy.loginfo(actual_pose)
+rospy.loginfo(actual_pose)"""
 
-group.set_pose_target(pose_target)
+#Pose-driven (=joint-driven)
+if len(sys.argv) != 2:
+    rospy.loginfo("No pose specified")
+    group.set_named_target("Middle_center")
+else:
+    try:
+        group.set_named_target(sys.argv[1])
+    except:
+        rospy.logerror("Unknown pose, try entering an existing pose")
 
-group.set_goal_tolerance(0.01)
-plan1 = group.plan()
+
+#group.set_pose_target(pose_target)
+
+group.set_goal_tolerance(0.02)
+
+success = group.go(wait=True)
+group.stop()
+group.clear_pose_targets()
+#plan1 = group.plan()
 #rospy.sleep(10)
-group.go(wait=True)
+#group.go(wait=True)
 
 
 moveit_commander.roscpp_shutdown()
