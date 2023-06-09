@@ -231,6 +231,97 @@
         <joint name="arm_wrist_2_joint" value="1.5079"/>
         <joint name="arm_wrist_3_joint" value="0"/>
     </group_state>
+    <group_state name="High_left" group="manipulator">
+        <joint name="arm_elbow_joint" value="0"/>
+        <joint name="arm_shoulder_lift_joint" value="-0.7064"/>
+        <joint name="arm_shoulder_pan_joint" value="0.5026"/>
+        <joint name="arm_wrist_1_joint" value="0.8551"/>
+        <joint name="arm_wrist_2_joint" value="1.5079"/>
+        <joint name="arm_wrist_3_joint" value="0"/>
+    </group_state>
+    <group_state name="High_left2" group="manipulator">
+        <joint name="arm_elbow_joint" value="0"/>
+        <joint name="arm_shoulder_lift_joint" value="-0.7064"/>
+        <joint name="arm_shoulder_pan_joint" value="0.9295"/>
+        <joint name="arm_wrist_1_joint" value="0.8551"/>
+        <joint name="arm_wrist_2_joint" value="1.5079"/>
+        <joint name="arm_wrist_3_joint" value="0"/>
+    </group_state>
+    <group_state name="High_left3" group="manipulator">
+        <joint name="arm_elbow_joint" value="0"/>
+        <joint name="arm_shoulder_lift_joint" value="-0.7064"/>
+        <joint name="arm_shoulder_pan_joint" value="1.4499"/>
+        <joint name="arm_wrist_1_joint" value="0.8551"/>
+        <joint name="arm_wrist_2_joint" value="1.5079"/>
+        <joint name="arm_wrist_3_joint" value="0"/>
+    </group_state>
+    <group_state name="High_backleft1" group="manipulator">
+        <joint name="arm_elbow_joint" value="0"/>
+        <joint name="arm_shoulder_lift_joint" value="-0.7064"/>
+        <joint name="arm_shoulder_pan_joint" value="2.0448"/>
+        <joint name="arm_wrist_1_joint" value="0.8551"/>
+        <joint name="arm_wrist_2_joint" value="1.5079"/>
+        <joint name="arm_wrist_3_joint" value="0"/>
+    </group_state>
+    <group_state name="High_backleft2" group="manipulator">
+        <joint name="arm_elbow_joint" value="0"/>
+        <joint name="arm_shoulder_lift_joint" value="-0.7064"/>
+        <joint name="arm_shoulder_pan_joint" value="2.714"/>
+        <joint name="arm_wrist_1_joint" value="0.8551"/>
+        <joint name="arm_wrist_2_joint" value="1.5079"/>
+        <joint name="arm_wrist_3_joint" value="0"/>
+    </group_state>
+    <group_state name="High_back" group="manipulator">
+        <joint name="arm_elbow_joint" value="0"/>
+        <joint name="arm_shoulder_lift_joint" value="-0.7064"/>
+        <joint name="arm_shoulder_pan_joint" value="3.0858"/>
+        <joint name="arm_wrist_1_joint" value="0.8551"/>
+        <joint name="arm_wrist_2_joint" value="1.5079"/>
+        <joint name="arm_wrist_3_joint" value="0"/>
+    </group_state>
+    <group_state name="High_right" group="manipulator">
+        <joint name="arm_elbow_joint" value="0"/>
+        <joint name="arm_shoulder_lift_joint" value="-0.7064"/>
+        <joint name="arm_shoulder_pan_joint" value="-0.6911"/>
+        <joint name="arm_wrist_1_joint" value="0.8551"/>
+        <joint name="arm_wrist_2_joint" value="1.5079"/>
+        <joint name="arm_wrist_3_joint" value="0"/>
+    </group_state>
+    <group_state name="High_right2" group="manipulator">
+        <joint name="arm_elbow_joint" value="0"/>
+        <joint name="arm_shoulder_lift_joint" value="-0.7064"/>
+        <joint name="arm_shoulder_pan_joint" value="-0.9295"/>
+        <joint name="arm_wrist_1_joint" value="-0.754"/>
+        <joint name="arm_wrist_2_joint" value="1.6336"/>
+        <joint name="arm_wrist_3_joint" value="0"/>
+    </group_state>
+    <group_state name="High_right3" group="manipulator">
+        <joint name="arm_elbow_joint" value="0"/>
+        <joint name="arm_shoulder_lift_joint" value="-0.7064"/>
+        <joint name="arm_shoulder_pan_joint" value="-1.4499"/>
+        <joint name="arm_wrist_1_joint" value="0.8551"/>
+        <joint name="arm_wrist_2_joint" value="1.5079"/>
+        <joint name="arm_wrist_3_joint" value="0"/>
+    </group_state>
+    <group_state name="High_backright1" group="manipulator">
+        <joint name="arm_elbow_joint" value="0"/>
+        <joint name="arm_shoulder_lift_joint" value="-0.7064"/>
+        <joint name="arm_shoulder_pan_joint" value="-2.0448"/>
+        <joint name="arm_wrist_1_joint" value="0.8551"/>
+        <joint name="arm_wrist_2_joint" value="1.5079"/>
+        <joint name="arm_wrist_3_joint" value="0"/>
+    </group_state>
+    <group_state name="High_backright2" group="manipulator">
+        <joint name="arm_elbow_joint" value="0"/>
+        <joint name="arm_shoulder_lift_joint" value="-0.7064"/>
+        <joint name="arm_shoulder_pan_joint" value="-2.714"/>
+        <joint name="arm_wrist_1_joint" value="0.8551"/>
+        <joint name="arm_wrist_2_joint" value="1.5079"/>
+        <joint name="arm_wrist_3_joint" value="0"/>
+    </group_state>
+    
+    
+    
     <group_state name="Highest_center" group="manipulator">
         <joint name="arm_elbow_joint" value="0"/>
         <joint name="arm_shoulder_lift_joint" value="-1.0782"/>
