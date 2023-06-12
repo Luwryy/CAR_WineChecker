@@ -82,21 +82,13 @@ rospy.loginfo(actual_pose)"""
 
 #Pose-driven (=joint-driven)
 if len(sys.argv) != 2:
-<<<<<<< HEAD
-    rospy.loginfo("No pose specified")
-=======
     rospy.loginfo("No posessssssssssss specified")
->>>>>>> 7cea0b790d893b26e739743d328ccc7861737830
     group.set_named_target("Middle_center")
 else:
     try:
         group.set_named_target(sys.argv[1])
     except:
-<<<<<<< HEAD
-        rospy.logerr("Unknown pose, try entering an existing pose")
-=======
         rospy.logerror("Unknown pose, try entering an existing pose")
->>>>>>> 7cea0b790d893b26e739743d328ccc7861737830
 
 
 #group.set_pose_target(pose_target)

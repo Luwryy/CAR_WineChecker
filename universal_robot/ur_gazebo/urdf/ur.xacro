@@ -79,10 +79,69 @@
     <origin xyz="0 0 0" rpy="0 0 0"/>
   </joint-->
 
+
+
   <link name="tool0_controller"/>
   <joint name="tool_controller_fake_joint" type="fixed">
     <parent link="$(arg prefix)tool0"/>
     <child link="tool0_controller"/>
     <origin xyz="0 0 0" rpy="0 0 0"/>
   </joint>
+
+  <joint name="camera_optical_joint" type="fixed">
+    <parent link="camera_link"/>
+    <child link="camera_link_optical"/>
+    <origin xyz="0 0 0.1" rpy="0 ${-pi/2} ${-pi/2}"/>
+  </joint>
+  <link name="camera_link_optical"/>
+
+  <gazebo reference="camera_link_optical">
+    <sensor type="camera" name="camera1">
+    <pose> 0 0 0 0 0 0 </pose>
+      <update_rate>30.0</update_rate>
+      <visualize>true</visualize>
+      <camera name="head">
+        <horizontal_fov>1.3962634</horizontal_fov>
+        <image>
+          <width>800</width>
+          <height>800</height>
+          <format>R8G8B8</format>
+        </image>
+        <clip>
+          <near>0.02</near>
+          <far>300</far>
+        </clip>
+        <noise>
+          <type>gaussian</type>
+          <!-- Noise is sampled independently per pixel on each frame.
+               That pixel's noise value is added to each of its color
+               channels, which at that point lie in the range [0,1]. -->
+          <mean>0.0</mean>
+          <stddev>0.007</stddev>
+        </noise>
+      </camera>
+      <plugin name="camera_controller" filename="libgazebo_ros_camera.so">
+      
+        <alwaysOn>true</alwaysOn>
+        <updateRate>0.0</updateRate>
+        <cameraName>camera1</cameraName>
+        <imageTopicName>image_raw</imageTopicName>
+        <cameraInfoTopicName>camera_info</cameraInfoTopicName>
+        <frameName>camera_link_optical</frameName>
+        <!-- setting hackBaseline to anything but 0.0 will cause a misalignment
+            between the gazebo sensor image and the frame it is supposed to
+            be attached to -->
+        <hackBaseline>0.0</hackBaseline>
+        <distortionK1>0.0</distortionK1>
+        <distortionK2>0.0</distortionK2>
+        <distortionK3>0.0</distortionK3>
+        <distortionT1>0.0</distortionT1>
+        <distortionT2>0.0</distortionT2>
+        <CxPrime>0</CxPrime>
+        <Cx>0.0</Cx>
+        <Cy>0.0</Cy>
+        <focalLength>0.0</focalLength>
+      </plugin>
+    </sensor>
+  </gazebo>
 </robot>
