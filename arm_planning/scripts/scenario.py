@@ -75,6 +75,7 @@ group.set_goal_tolerance(0.02)
 
 #Scenario
 arm_move("Close_center")
+rospy.sleep(10)
 
 speed_publisher.publish(speed[1])
 rospy.sleep(7)
