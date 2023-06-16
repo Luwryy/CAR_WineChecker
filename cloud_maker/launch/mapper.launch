@@ -176,7 +176,7 @@
   <arg unless="$(arg rgbd_sync)"  name="rgbd_topic_relay"          default="$(arg rgbd_topic)_relay"/>
 
   <!-- Cloud map saving node -->
-  <node name="map_recorder" pkg="freenect_launch" type="map_recorder.py" 
+  <node name="map_recorder" pkg="cloud_maker" type="map_sav.py" 
   args="$(arg database_path)"/>
 
   <!-- Nodes -->

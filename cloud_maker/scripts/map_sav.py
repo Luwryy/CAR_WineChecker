@@ -2,10 +2,12 @@
 
 import sys
 import os
+import shutil
 import copy
 import rospy
 import roslaunch
 from std_msgs.msg import String
+from std_srvs.srv import Empty
 #from sensor_msgs.msg import PointCloud2
 import rospkg
 
@@ -43,23 +45,25 @@ cloudBag.shutdown()
 """
 
 
-"""
+
 def rtab_resume():
     rospy.wait_for_service('/rtabmap/resume')
     try:
-        func1 = rospy.ServiceProxy('/rtabmap/resume', std_srvs/Empty)
-        resp = func1()
+        func1 = rospy.ServiceProxy('/rtabmap/resume', Empty)
+        func1()
         
     except rospy.ServiceException as e:
         print("Service call failed: %s"%e)
+        return 1
 
     rospy.wait_for_service('/rtabmap/resume_odom')
     try:
-        func2 = rospy.ServiceProxy('/rtabmap/resume_odom', std_srvs/Empty)
-        resp += func2()
-        return resp.truth
+        func2 = rospy.ServiceProxy('/rtabmap/resume_odom', Empty)
+        func2()
+        return 0
     except rospy.ServiceException as e:
-        print("Service call failed: %s"%e)"""
+        print("Service call failed: %s"%e)
+        return 1
 
 
 
@@ -75,28 +79,30 @@ def publish_map():
     except rospy.ServiceException as e:
         print("Service call failed: %s"%e)
         return 1"""
-"""
+
 def rtab_pause():
     rospy.wait_for_service('/rtabmap/pause')
     try:
-        func = rospy.ServiceProxy('/rtabmap/pause', std_srvs/Empty)
-        resp = func()
-        return resp.truth
+        func = rospy.ServiceProxy('/rtabmap/pause', Empty)
+        func()
+        return 0
     except rospy.ServiceException as e:
-        print("Service call failed: %s"%e)"""
+        print("Service call failed: %s"%e)
+        return 1
 
 def dataString(data):
     return data
 
 def record(data, args):
-    cloudBag = args[0]
-    cloudMap = args[1]
+    
+    db_path = args
+    
 
     #If the given command is good
     if data == String("save"): 
-
+        #rospy.logwarn(args)
         #Closing the bag and saving the cloudmap
-        cloudBag.shutdown()
+        """cloudBag.shutdown()
         rospy.loginfo("Rosbag closed")
         cloudMap.start()
         rospy.sleep(1)
@@ -105,33 +111,59 @@ def record(data, args):
         #Deleting the bag
         bag_path = os.path.expanduser("~/catkin_mix/bags/cloudBag1.bag")
         if os.path.exists(bag_path):
-            #os.remove(bag_path)
+            os.remove(bag_path)
         #else:
-            rospy.logwarn("Bag couldn't be deleted")
+            rospy.logwarn("Bag couldn't be deleted")"""
 
-        rospy.loginfo("The cloudmap is saved, please restart map_recorder from freenect_launch to save it again")
+
+        rtab_pause()
+
+        db_store = os.path.expanduser('~/catkin_mix/bags')
+
+        db_name = "rtabmap1.db";i = 1
+        while(os.path.exists(db_store+'/'+db_name) and i < 1000):
+            i+=1
+            db_name = "rtabmap%s.db"% i
+            #rospy.logwarn(db_store+db_name)
+        else:
+            if(i < 1000):
+                db_name = "rtabmap%s.db"% i
+                #rospy.logwarn(os.path.exists(db_store+db_name))
+            else:
+                rospy.logwarn("Could not find a name for the data base, please make some room in"+db_store)
+                return 1
+
+        original = r'%s'% db_path
+        target = r'%s/%s' % (db_store, db_name)
+
+        shutil.copyfile(original, target)
+
+        rtab_resume()
+
+        rospy.loginfo("Database saved, mapping will resume")
+        #rospy.loginfo("The cloudmap is saved, please restart map_recorder from freenect_launch to save it again")
 
         return 0
     else:
         rospy.logwarn("Input not recognized, please type 'save' if you wish to save the current cloud map")
         return 1
 
-def map_recorder():
+def map_recorder(db_path):
     rp = rospkg.RosPack()
-    package_path = rp.get_path('freenect_launch')
+    package_path = rp.get_path('cloud_maker')
     
-    uuid = roslaunch.rlutil.get_or_generate_uuid(None, False)
+    """uuid = roslaunch.rlutil.get_or_generate_uuid(None, False)
     roslaunch.configure_logging(uuid)
 
     cloudBag = roslaunch.parent.ROSLaunchParent(uuid, [package_path+"/launch/cloudBag.launch"])
     cloudMap = roslaunch.parent.ROSLaunchParent(uuid, [package_path+"/launch/save_to_pcd.launch"])
     cloudBag.start()
-    rospy.loginfo("Rosbag started")
+    rospy.loginfo("Rosbag started")"""
 
     rospy.init_node('mapRecord', anonymous=True)
     rate = rospy.Rate(2) # 2hz
 
-    rospy.Subscriber('/map_record', String, record,(cloudBag, cloudMap))
+    rospy.Subscriber('/map_record', String, record,(db_path))
 
     rospy.spin()
 
@@ -149,8 +181,8 @@ if __name__ == '__main__':
         if os.path.exists(data_base):
             os.remove(data_base)
             rospy.loginfo("Previous data base deleted") 
-            map_recorder()
+            map_recorder(data_base)
         else:
             rospy.logwarn("The database does not exist and couldn't be deleted") 
-            map_recorder()
+            map_recorder(data_base)
 
