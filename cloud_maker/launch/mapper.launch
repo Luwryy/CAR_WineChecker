@@ -7,6 +7,9 @@
 <!--I can be shorter than 10s if needed-->
 <arg name="node_start_delay" default="10.0" />  
 
+<!--Allow to change the directory where the databases are stored-->
+<arg name="save_path" default="~/catkin_mix/databases"/>
+
 
   <!--Start RTABmap and beging the mapping
   The following code is the content of the launch file rtabmap.launch from rtabmap_launch 
@@ -177,7 +180,7 @@
 
   <!-- Cloud map saving node -->
   <node name="map_recorder" pkg="cloud_maker" type="map_sav.py" 
-  args="$(arg database_path)"/>
+  args="db_path:=$(arg database_path) sav_path:=$(arg save_path)"/>
 
   <!-- Nodes -->
   <group ns="$(arg namespace)">
