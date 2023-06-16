@@ -1,0 +1,10 @@
+<launch>
+    <arg name="is_record_odom" default="true"/>
+    <arg name="bags_directory" default="/home/les_victor/catkin_mix/bags/"/>
+    <arg name="number" default="1"/>
+    <arg name="bag_name" default="cloudBag$(arg number).bag"/>
+   <!-- Record bag -->
+    <node name="bag_record" pkg="rosbag" type="record"
+        args="record -O $(arg bags_directory)$(arg bag_name) /rtabmap/cloud_map"
+        if="$(eval is_record_odom)"/>
+</launch>

@@ -1,0 +1,11 @@
+<launch>
+    <arg name="bags_directory" default="/home/les_victor/catkin_mix/bags/"/>
+    <arg name="pcd_directory" default="/home/les_victor/catkin_mix/cloudMaps/"/>
+    <arg name="number" default="1"/>
+    <arg name="bag_name" default="cloudBag$(arg number).bag"/>
+   <!-- Record cloudMap -->
+    <node name="point_cloud_save" pkg="pcl_ros" type="bag_to_pcd"
+        args="$(arg bags_directory)$(arg bag_name)
+         /rtabmap/cloud_map
+         $(arg pcd_directory)"/>
+</launch>

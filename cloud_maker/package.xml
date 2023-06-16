@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
 <package format="2">
-  <name>arm_planning</name>
+  <name>cloud_maker</name>
   <version>0.0.0</version>
-  <description>The arm_planning package</description>
+  <description>The cloud_maker package</description>
 
   <!-- One maintainer tag required, multiple allowed, one person per tag -->
   <!-- Example:  -->
@@ -66,6 +66,11 @@
   <exec_depend>message_runtime</exec_depend>
   <exec_depend>moveit_commander</exec_depend>
   <exec_depend>moveit_msgs</exec_depend>
+  <exec_depend>freenect_camera</exec_depend>
+  <exec_depend>image_proc</exec_depend>
+  <exec_depend>nodelet</exec_depend>
+  <exec_depend>rgbd_launch</exec_depend>
+  <exec_depend>tf</exec_depend>
 
 
   <!-- The export tag contains other, unspecified, tags -->
