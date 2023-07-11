@@ -1,11 +1,42 @@
 <launch>
-  <!--Start the kinect and publishing the images in the /camera ns-->
-  <include file="$(find freenect_launch)/launch/freenect.launch">
-      <arg name="depth_registration"              value="true" />
-  </include>
 
-<!--I can be shorter than 10s if needed-->
-<arg name="node_start_delay" default="10.0" />  
+  <!--Change the exploited topics depending on the model of the camera used-->
+  <arg name="camera_model" default="realsense"/>
+  <arg if="$(eval camera_model == 'kinect')" name="cam1" default="true"/>
+  <arg unless="$(eval camera_model == 'kinect')" name="cam1" default="false"/>
+  <arg if="$(eval camera_model == 'realsense')" name="cam2" default="true"/>
+  <arg unless="$(eval camera_model == 'realsense')" name="cam2" default="false"/>
+
+
+
+  <!--I can be shorter than 10s if needed-->
+  <arg if="$(arg cam2)" name="node_start_delay" default="5.0" />  
+  <arg if="$(arg cam2)" name="rgb_topic"               default="/camera/color/image_raw" />
+  <arg if="$(arg cam2)" name="depth_topic"             default="/camera/depth/image_rect_raw" />
+  <arg if="$(arg cam2)" name="camera_info_topic"       default="/camera/color/camera_info" />
+  <arg if="$(arg cam2)" name="depth_camera_info_topic" default="$(arg camera_info_topic)" />
+
+  <arg if="$(arg cam1)" name="node_start_delay" default="5.0" />  
+  <!-- RGB-D related topics -->
+  <arg if="$(arg cam1)" name="rgb_topic"               default="/camera/rgb/image_rect_color" />
+  <arg if="$(arg cam1)" name="depth_topic"             default="/camera/depth_registered/image_raw" />
+  <arg if="$(arg cam1)" name="camera_info_topic"       default="/camera/rgb/camera_info" />
+  <arg if="$(arg cam1)" name="depth_camera_info_topic" default="$(arg camera_info_topic)" />
+
+
+  <group if="$(eval camera_model == 'kinect')">
+    <!--Start the kinect and publishing the images in the /camera ns-->
+    <include file="$(find freenect_launch)/launch/freenect.launch">
+        <arg name="depth_registration"              value="true" />
+    </include>
+  </group>
+
+  <group if="$(eval camera_model == 'realsense')">
+    <!--Start the kinect and publishing the images in the /camera ns-->
+    <include file="$(find realsense2_camera)/launch/rs_camera.launch">
+    </include>
+  </group>
+
 
 <!--Allow to change the directory where the databases are stored-->
 <arg name="save_path" default="~/catkin_mix/databases"/>
@@ -80,10 +111,12 @@
   <arg name="approx_sync_max_interval"  default="0"/> <!-- (sec) 0 means infinite interval duration (used with approx_sync=true) -->
 
   <!-- RGB-D related topics -->
-  <arg name="rgb_topic"               default="/camera/rgb/image_rect_color" />
+  <!--arg name="rgb_topic"               default="/camera/rgb/image_rect_color" />
   <arg name="depth_topic"             default="/camera/depth_registered/image_raw" />
   <arg name="camera_info_topic"       default="/camera/rgb/camera_info" />
-  <arg name="depth_camera_info_topic" default="$(arg camera_info_topic)" />
+  <arg name="depth_camera_info_topic" default="$(arg camera_info_topic)" /-->
+
+  
 
   <!-- stereo related topics -->
   <arg name="stereo_namespace"        default="/stereo_camera"/>
@@ -497,4 +530,3 @@
   </node>
 
 </launch>
-

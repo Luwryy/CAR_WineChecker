@@ -17,7 +17,7 @@
 
   <!-- Run the main MoveIt! -->
   <include file="$(find ur3_moveit_config)/launch/moveit_planning_execution.launch">
-    <arg name="sim" value="true"/>
+    <arg name="sim" value="false"/>
   </include>
 
   <!-- Run Rviz -->
