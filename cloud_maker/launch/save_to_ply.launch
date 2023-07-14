@@ -1,0 +1,10 @@
+<launch>
+    <arg name="_topic" default="/octomap_point_cloud_centers"/>
+    <arg name="folderpath" default="/home/robot/catkin_ws/bags"/>
+    <arg name="_file_prefix" default="point_cloud"/>
+   <!-- Record bag -->
+    <group ns="map_saving">
+        <node name="ply_write" pkg="point_cloud_io" type="write"
+        args="_topic:=$(arg _topic) _folder_path:=$(arg folderpath) _file_prefix:=$(arg _file_prefix)"/>
+    </group>
+</launch>

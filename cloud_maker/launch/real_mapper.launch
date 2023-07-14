@@ -1,0 +1,19 @@
+<launch>
+    <include file="$(find realsense2_camera)/launch/rs_camera.launch">
+        <arg name="filters" value="pointcloud"/>
+        <arg name="publish_tf" value="false"/>
+    </include>
+
+    <node name="octomap" pkg="octomap_server" type="octomap_server_node">
+        <param name="frame_id" type="string" value="camera_link"/>
+        <!--param name="base_frame_id" value="robot_base_link"/robot_base_link-->
+        <param name="resolution" value="0.02"/>
+        <param name="sensor_model/max_range" value="2.0" />
+        <remap from="cloud_in" to="/camera/depth/color/points"/>
+        <!--remap from="odom" to="/robot/robotnik_base_control/odom"/-->
+        
+    </node>
+
+    <node name="map_record" pkg="cloud_maker" type="map_sav_lidar.py">
+    </node>
+</launch>

@@ -32,7 +32,7 @@
   <xacro:include filename="$(find ur_gazebo)/urdf/ur_macro.xacro"/>
 
 
-  <xacro:include filename='$(find realsense2_description)/urdf/test_d435i_camera.urdf.xacro'/>
+  <xacro:include filename="$(find realsense2_description)/urdf/_d435i.urdf.xacro"/>
 
   <!--Declare arguments -->
   <xacro:arg name="joint_limit_params" default=""/>
@@ -52,6 +52,18 @@
   <xacro:arg name="safety_limits" default="false"/>
   <xacro:arg name="safety_pos_margin" default="0.15"/>
   <xacro:arg name="safety_k_position" default="20"/>
+
+  <xacro:macro name="ur_realsense" params="
+    prefix
+    joint_limits_parameters_file:=$(arg joint_limit_params)
+    kinematics_parameters_file:=$(arg kinematics_params)
+    physical_parameters_file:=$(arg physical_params)
+    visual_parameters_file:=$(arg visual_params)
+    transmission_hw_interface:=$(arg transmission_hw_interface)
+    safety_limits:=$(arg safety_limits)
+    safety_pos_margin:=$(arg safety_pos_margin)
+    safety_k_position:=$(arg safety_k_position)"
+  >
 
   <!-- Instantiate the Gazebo robot and pass it all the required arguments. -->
   <xacro:ur_robot_gazebo
@@ -81,11 +93,11 @@
     <origin xyz="0 0 0" rpy="0 0 0"/>
   </joint>
 
-  <joint name="base_wjoint" type="fixed">
+  <!--joint name="base_wjoint" type="fixed">
     <parent link="base_link"/>
     <child link="dbase_link"/>
     <origin xyz="0 0 0" rpy="0 0 0"/>
-  </joint>
+  </joint-->
 
   <link name="tool0_controller"/>
   <joint name="tool_controller_fake_joint" type="fixed">
@@ -124,7 +136,7 @@
   </joint>
 
   <xacro:sensor_d435i
-    name="cam1"
+    name="camera"
     parent="camera_support_link"
     use_nominal_extrinsics="true">
     <origin xyz="0 0 0" rpy="0 ${pi} ${+pi/2}"/>
@@ -163,5 +175,6 @@
     <origin xyz="+0.045 +0.030 0" rpy="0 0 0"/>
   </joint>
   
+  </xacro:macro>
 
 </robot>

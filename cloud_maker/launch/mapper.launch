@@ -34,6 +34,9 @@
   <group if="$(eval camera_model == 'realsense')">
     <!--Start the kinect and publishing the images in the /camera ns-->
     <include file="$(find realsense2_camera)/launch/rs_camera.launch">
+      <!--arg name="tf_prefix"                           value="false"/-->
+      <arg name="enable_pointcloud"                           value="true"/>
+
     </include>
   </group>
 
@@ -88,8 +91,8 @@
   <arg name="gui_cfg"                 default="~/.ros/rtabmap_gui.ini" />
   <arg name="rviz_cfg"                default="$(find rtabmap_launch)/launch/config/rgbd.rviz" />
 
-  <arg name="frame_id"                default="camera_link"/>     <!-- Fixed frame id, you may set "base_link" or "base_footprint" if they are published -->
-  <arg name="odom_frame_id"           default=""/>                <!-- If set, TF is used to get odometry instead of the topic -->
+  <arg name="frame_id"                default="cam1_link"/>     <!-- Fixed frame id, you may set "base_link" or "base_footprint" if they are published -->
+  <arg name="odom_frame_id"           default="cam1_link"/>                <!-- If set, TF is used to get odometry instead of the topic -->
   <arg name="odom_frame_id_init"      default=""/>                <!-- If set, TF map->odom is published even if no odometry topic has been received yet. The frame id should match the one in the topic. -->
   <arg name="map_frame_id"            default="map"/>
   <arg name="ground_truth_frame_id"   default=""/>     <!-- e.g., "world" -->
