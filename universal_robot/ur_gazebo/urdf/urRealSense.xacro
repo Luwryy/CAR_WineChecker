@@ -86,9 +86,9 @@
     here. Create a NEW xacro instead and decide whether you need to add
     a 'world' link there.
   -->
-  <link name="world"/>
-  <joint name="world_joint" type="fixed">
-    <parent link="world"/>
+  <link name="/map"/>
+  <joint name="mpa_joint" type="fixed">
+    <parent link="/map"/>
     <child link="base_link"/>
     <origin xyz="0 0 0" rpy="0 0 0"/>
   </joint>

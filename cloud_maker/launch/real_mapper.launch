@@ -5,7 +5,7 @@
     </include>
 
     <node name="octomap" pkg="octomap_server" type="octomap_server_node">
-        <param name="frame_id" type="string" value="camera_link"/>
+        <param name="frame_id" type="string" value="map"/>
         <!--param name="base_frame_id" value="robot_base_link"/robot_base_link-->
         <param name="resolution" value="0.02"/>
         <param name="sensor_model/max_range" value="2.0" />
