@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<robot xmlns:xacro="http://wiki.ros.org/xacro" name="$(arg robot_model)_robot">
+<robot xmlns:xacro="http://wiki.ros.org/xacro" name="ur3e_robot">
   <!--
     This is a top-level xacro instantiating the Gazebo-specific version of the
     'ur_robot' macro (ie: 'ur_robot_gazebo') and passing it values for all its
@@ -86,9 +86,9 @@
     here. Create a NEW xacro instead and decide whether you need to add
     a 'world' link there.
   -->
-  <link name="/map"/>
-  <joint name="mpa_joint" type="fixed">
-    <parent link="/map"/>
+  <link name="world"/>
+  <joint name="world_joint" type="fixed">
+    <parent link="world"/>
     <child link="base_link"/>
     <origin xyz="0 0 0" rpy="0 0 0"/>
   </joint>
@@ -172,7 +172,7 @@
   <joint name="multispec_cam_joint" type="fixed">
     <parent link="tool0_controller"/>
     <child link="multispec_cam"/>
-    <origin xyz="+0.045 +0.030 0" rpy="0 0 0"/>
+    <origin xyz="+0.045 +0.030 0.0" rpy="0 0 0"/>
   </joint>
   
   </xacro:macro>
