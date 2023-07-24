@@ -132,7 +132,7 @@
   <joint name="camera_support_joint" type="fixed">
     <parent link="tool0_controller"/>
     <child link="camera_support_link"/>
-    <origin xyz="0 -0.04 0" rpy="${pi/2} ${pi} ${pi}"/>
+    <origin xyz="0 -0.055 0" rpy="${pi/2} ${pi} ${pi}"/>
   </joint>
 
   <xacro:sensor_d435i
