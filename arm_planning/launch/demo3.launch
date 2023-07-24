@@ -10,7 +10,7 @@
   <arg name="limited" default="false"/>
 
    <include file="$(find ur3e_moveit_config_realsense)/launch/planning_context.launch">
-    <arg name="load_robot_description" value="true"/>
+    <arg name="load_robot_description" value="false"/>
   </include>
 
   
