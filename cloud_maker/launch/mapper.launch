@@ -23,7 +23,7 @@
   <arg if="$(arg cam1)" name="camera_info_topic"       default="/camera/rgb/camera_info" />
   <arg if="$(arg cam1)" name="depth_camera_info_topic" default="$(arg camera_info_topic)" />
 
-
+  <?ignore
   <group if="$(eval camera_model == 'kinect')">
     <!--Start the kinect and publishing the images in the /camera ns-->
     <include file="$(find freenect_launch)/launch/freenect.launch">
@@ -39,6 +39,7 @@
 
     </include>
   </group>
+  ?>
 
 
 <!--Allow to change the directory where the databases are stored-->
@@ -94,7 +95,7 @@
   <arg name="frame_id"                default="camera_link"/>     <!-- Fixed frame id, you may set "base_link" or "base_footprint" if they are published -->
   <arg name="odom_frame_id"           default="true"/>                <!-- If set, TF is used to get odometry instead of the topic -->
   <arg name="odom_frame_id_init"      default=""/>                <!-- If set, TF map->odom is published even if no odometry topic has been received yet. The frame id should match the one in the topic. -->
-  <arg name="map_frame_id"            default="world"/>
+  <arg name="map_frame_id"            default="robot_base_footprint"/>
   <arg name="ground_truth_frame_id"   default=""/>     <!-- e.g., "world" -->
   <arg name="ground_truth_base_frame_id" default=""/>  <!-- e.g., "tracker", a fake frame matching the frame "frame_id" (but on different TF tree) -->
   <arg name="namespace"               default="rtabmap"/>
