@@ -1,0 +1,69 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://wiki.ros.org/xacro">
+  <!--
+    Custom xacro macro for the ur arm with our gripper.
+  -->
+
+  <xacro:include filename="$(find ur_description)/urdf/inc/ur_common.xacro" />
+
+  <xacro:read_model_data
+      joint_limits_parameters_file="${joint_limits_parameters_file}" 
+      kinematics_parameters_file="${kinematics_parameters_file}"
+      physical_parameters_file="${physical_parameters_file}"
+      visual_parameters_file="${visual_parameters_file}"/>
+
+  <xacro:include filename="$(find ur_description)/urdf/inc/ur_macro.xacro" />
+
+  <xacro:macro name="gripper" params="
+    prefix
+    joint_limits_parameters_file
+    kinematics_parameters_file
+    physical_parameters_file
+    visual_parameters_file
+    transmission_hw_interface:=hardware_interface/EffortJointInterface
+    safety_limits:=false
+    safety_pos_margin:=0.15
+    safety_k_position:=20"
+  >
+  <xacro:ur_robot 
+      prefix = "${prefix}"
+      joint_limits_parameters_file= "${joint_limits_parameters_file}"
+      kinematics_parameters_file  = "${kinematics_parameters_file}"
+      physical_parameters_file    = "${physical_parameters_file}"
+      visual_parameters_file      = "${visual_parameters_file}"
+      transmission_hw_interface   = "${transmission_hw_interface}"
+      safety_limits               = "${safety_limits}"
+      safety_pos_margin           = "${safety_pos_margin}"
+      safety_k_position           = "${safety_k_position}"
+    />    
+
+    <!--Camera modelisation-->
+    <link name="camera_link">
+      <visual>
+        <origin xyz="0 0 0" rpy="${pi/2} 0 0"/>
+        <geometry>
+          <mesh scale="1 1 1" filename="package://ur_description/meshes/ur5_mod/visual/Camera_Herramienta_neumatica.dae"/>
+        </geometry>
+        <!--material name="${wrist_3_visual_material_name}">
+          <color rgba="${wrist_3_visual_material_color}"/>
+        </material-->
+      </visual>
+      <collision>
+        <origin xyz="0 0 0" rpy="${pi/2} 0 0"/>
+        <geometry>
+          <mesh scale="1 1 1" filename="package://ur_description/meshes/ur5_mod/collision/Camera_Herramienta_neumatica.stl"/>
+        </geometry>
+      </collision>
+      <xacro:cylinder_inertial radius="0.01" length="0.01" mass="0.01"><!--${wrist_3_inertia_radius}" length="${wrist_3_inertia_length}"  mass="${wrist_3_mass}"-->
+        <origin xyz="0 0 0" rpy="0 0 0" />
+      </xacro:cylinder_inertial>
+    </link>
+    <joint name="camera_joint" type="fixed">
+      <parent link="${prefix}tool0" />
+      <child link="camera_link" />
+      <origin xyz="0 0 0.01" rpy="0 0 0" />
+      <axis xyz="0 0 1" />
+    </joint>
+
+  </xacro:macro>
+</robot>

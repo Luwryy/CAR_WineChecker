@@ -1,0 +1,15 @@
+controller_list:
+  - name: fake_manipulator_controller
+    type: $(arg fake_execution_type)
+    joints:
+      - arm_shoulder_pan_joint
+      - arm_shoulder_lift_joint
+      - arm_elbow_joint
+      - arm_wrist_1_joint
+      - arm_wrist_2_joint
+      - arm_wrist_3_joint
+    publish_rate: 50
+initial:  # Define initial robot poses per group
+  - group: manipulator
+    pose: home
+

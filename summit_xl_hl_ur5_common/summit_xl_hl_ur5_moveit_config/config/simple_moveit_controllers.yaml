@@ -1,0 +1,21 @@
+controller_list:
+  - name: manipulator_controller
+    action_ns: follow_joint_trajectory
+    type: FollowJointTrajectory
+    default: True
+    joints:
+      - arm_shoulder_pan_joint
+      - arm_shoulder_lift_joint
+      - arm_elbow_joint
+      - arm_wrist_1_joint
+      - arm_wrist_2_joint
+      - arm_wrist_3_joint
+  - name: mover_controller
+    action_ns: follow_joint_trajectory
+    type: FollowJointTrajectory
+    default: True
+    joints:
+      - joint_back_left_wheel
+      - joint_back_right_wheel
+      - joint_front_left_wheel
+      - joint_front_right_wheel
