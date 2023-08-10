@@ -20,7 +20,7 @@
     kinematics_parameters_file
     physical_parameters_file
     visual_parameters_file
-    transmission_hw_interface:=hardware_interface/EffortJointInterface
+    transmission_hw_interface:=hardware_interface/PositionJointInterface
     safety_limits:=false
     safety_pos_margin:=0.15
     safety_k_position:=20"
@@ -54,7 +54,7 @@
           <mesh scale="1 1 1" filename="package://ur_description/meshes/ur5_mod/collision/Camera_Herramienta_neumatica.stl"/>
         </geometry>
       </collision>
-      <xacro:cylinder_inertial radius="0.01" length="0.01" mass="0.01"><!--${wrist_3_inertia_radius}" length="${wrist_3_inertia_length}"  mass="${wrist_3_mass}"-->
+      <xacro:cylinder_inertial radius="0.05" length="0.1" mass="0.1">
         <origin xyz="0 0 0" rpy="0 0 0" />
       </xacro:cylinder_inertial>
     </link>

@@ -49,6 +49,7 @@
   <!-- Gazebo parameters -->
   <arg name="paused" default="false" doc="Starts Gazebo in paused mode" />
   <arg name="gui" default="true" doc="Starts Gazebo gui" />
+  <arg name="gazebo_world" default="$(find summit_xl_gazebo)/worlds/domain.world" doc="The '.world' file to load in Gazebo." /><!--emptyfarm.world farmWith1CropRow.world domain.world-->
 
   <!-- Load urdf on the parameter server -->
   <include file="$(arg robot_description_file)">
@@ -71,5 +72,9 @@
     <arg name="gui" value="$(arg gui)"/>
     <arg name="paused" value="$(arg paused)"/>
     <arg name="stopped_controllers" value="$(arg stopped_controllers)"/>
+    <arg name="gazebo_world" value="$(arg gazebo_world)"/>
   </include>
+  
+
+
 </launch>

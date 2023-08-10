@@ -10,7 +10,7 @@
   <arg name="limited" default="false"/>
 
   <!-- Run Rviz -->
-  <include file="package://summit_xl_hl_description/launch/moveit_rviz.launch" />
+  <include file="package://summit_xl_hl_ur5_description/launch/summit_xl_hl_ur5_rviz.launch" />
 
 </launch>
 

@@ -33,6 +33,7 @@
   <arg name="safety_k_position" default="20" doc="Used to set k position in the safety controller" />
 
   <param name="robot_description" command="$(find xacro)/xacro '$(find ur_gazebo)/urdf/ur.xacro'
+  prefix:=arm_
     robot_model:=$(arg robot_model)
     joint_limit_params:=$(arg joint_limit_params)
     kinematics_params:=$(arg kinematics_params)
